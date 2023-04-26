@@ -292,6 +292,7 @@ void drawSoyjak(QPainter &painter, int x, int y, float k) {
     //Дискотека Овсянкин
     //Эмо рэперы панки
     //Здесь вас выдадут замуж
+    //А дальше я не помню
 
     // брови
     painter.setPen(QPen(Qt::black, 5));
@@ -318,6 +319,67 @@ void drawSoyjak(QPainter &painter, int x, int y, float k) {
 
 }
 
+void drawSecSoyjak(QPainter &painter, int x, int y, float k) {
+    QBrush solid_black;
+    solid_black.setStyle(Qt::SolidPattern);
+    solid_black.setColor(Qt::black);
+    QBrush solid_white;
+    solid_white.setStyle(Qt::SolidPattern);
+    solid_white.setColor(Qt::white);
+    QPen mainPen;
+    mainPen.setColor(Qt::black);
+    mainPen.setWidth(2 * k);
+    painter.setPen(mainPen);
+    painter.setBrush(solid_white);
+    //тело
+    painter.drawEllipse(x, y + 105 * k, 180 * k, 160 * k);
+    //голова
+    painter.drawEllipse(x + 40 * k, y, 100 * k, 140 * k);
+    //глаза
+    painter.drawEllipse(x + 55 * k, y + 45 * k, 25 * k, 12.5 * k);
+    painter.drawEllipse(x + 100 * k, y + 45 * k, 25 * k, 12.5 * k);
+    painter.setBrush(solid_black);
+    painter.drawEllipse(x + 65 * k, y + 45 * k, 25, 25);
+    painter.drawEllipse(x + 110 * k, y + 45 * k, 25, 25);
+    painter.drawArc(x + 52 * k, y + 35 * k, 30 * k, 25 * k, 30 * 16, 120 * 16);
+    painter.drawArc(x + 97 * k, y + 35 * k, 30 * k, 25 * k, 30 * 16, 120 * 16);
+    //очки
+    for (int i = 0; i < 2; i++) {
+        QPointF ochko[6] = {
+            QPointF(x + 50 * k + 90 * i, y + 45 * k),
+            QPointF(x + 50 * k + 90 * i, y + 58 * k),
+            QPointF(x + 55 * k + 90 * i, y + 62 * k),
+            QPointF(x + 80 * k + 90 * i, y + 62 * k),
+            QPointF(x + 85 * k + 90 * i, y + 58 * k),
+            QPointF(x + 85 * k + 90 * i, y + 45 * k),
+            };
+        painter.drawPolyline(ochko, 6);
+    }
+    painter.drawLine(x + 44 * k, y + 45 * k, x + 135 * k, y + 45 * k);
+
+    painter.setBrush(Qt::Dense7Pattern);
+    painter.setPen(Qt::NoPen);
+    painter.drawEllipse(x + 55 * k, y + 90 * k, 70 * k, 50 * k);
+    painter.setPen(mainPen);
+    painter.setBrush(Qt::NoBrush);
+//    // нос
+//    painter.drawArc(x + 80 * k, y + 65 * k, 20 * k, 15*k, 0, 180 * 16);
+//    painter.drawEllipse(x + 83 * k, y + 70 * k, 5 * k, 5 * k);
+//    painter.drawEllipse(x + 92 * k, y + 70 * k, 5 * k, 5 * k);
+    // тоже нос но овалом тупа
+    painter.drawEllipse(x + 81 * k, y + 63 * k, 18 * k, 23 * k);
+    // рот
+    painter.setBrush(solid_white);
+    painter.drawEllipse(x + 75 * k, y + 93 * k, 30 * k, 30 * k);
+    painter.setBrush(solid_black);
+    painter.drawEllipse(x + 84 * k, y + 96 * k, 18 * k, 24 * k);
+    // морщины
+    painter.setPen(QPen(Qt::black, 1 * k));
+    painter.drawLine(x + 60 * k, y + 20 * k, x + 120 * k, y + 20 * k);
+    painter.drawLine(x + 60 * k, y + 25 * k, x + 120 * k, y + 25 * k);
+    painter.drawLine(x + 60 * k, y + 30 * k, x + 120 * k, y + 30 * k);
+}
+
 void MainWindow::paintEvent(QPaintEvent *event){
     QPainter painter;
     painter.begin(this);
@@ -336,6 +398,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
     drawBorschtPot(painter, 370, 160, 1.2);
     drawBeaver(painter, 180, 130, 1.3);
     drawSoyjak(painter, 380, 130, 1.5);
+    drawSecSoyjak(painter, -60, 120, 2);
     painter.end();
 }
 
